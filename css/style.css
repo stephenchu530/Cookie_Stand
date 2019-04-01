@@ -1,3 +1,9 @@
 /*
   Add CSS here
 */
+header {
+  background-image: url("../img/salmon.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 200px;
+}
