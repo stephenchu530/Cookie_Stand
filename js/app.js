@@ -136,9 +136,9 @@ places.forEach(function (place) {
   let ulEl = document.createElement('ul');
   for (let i = 0; i < hours; i++) {
     let liEl = document.createElement('li');
-    let time = (i < 6) ? 'am' : 'pm';
+    let tod = (i < 6) ? 'am' : 'pm';
     let hr = (i < 7) ? i + 6 : i - 6;
-    liEl.textContent = `${hr}${time}: ${place.cookiesPurchased[i]} cookies`;
+    liEl.textContent = `${hr}${tod}: ${place.cookiesPurchased[i]} cookies`;
     ulEl.appendChild(liEl);
   }
   let liEl = document.createElement('li');
