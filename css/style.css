@@ -26,8 +26,6 @@ th, td {
   vertical-align: middle;
 }
 #tableHeader > * {
-  border: 0;
-}
-th {
   font-weight: 600;
+  border: 0;
 }
