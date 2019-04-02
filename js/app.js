@@ -90,6 +90,7 @@ let alki = {
   total: 0
 };
 
+// Calculate the total cookies sold for the day
 function calculateTotal() {
   for (let i = 0; i < this.cookiesPurchased.length; i++) {
     this.total += this.cookiesPurchased[i];
