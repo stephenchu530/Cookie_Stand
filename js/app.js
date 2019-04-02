@@ -33,7 +33,7 @@ function randNumCustomers(minCustomers, maxCustomers) {
   ) + minCustomers;
 }
 
-// Function to Instantiate Store Locations
+// Function to instantiate store locations
 function makeStores() {
   let stores = [];
   storeSpecs.forEach(function(store) {
@@ -44,21 +44,27 @@ function makeStores() {
   return stores;
 }
 
-// Function to Render Empty Table with Header
+// Function to render empty table with header
 function renderDailySalesTable() {
   let sectionEl = document.getElementById('dailySales');
   let table = document.createElement('table');
+  renderHeader(table);
+  sectionEl.appendChild(table);
+}
+
+// Helper function to render table header
+function renderHeader(table) {
   let row = document.createElement('row');
-  storeHours.forEach(function(hour) {
-    let header = document.createElement('th');
-    header.textContent = hour;
+  var header = document.createElement('th');
+  storeHours.forEach(function(item) {
+    header = document.createElement('th');
+    header.textContent = item;
     row.appendChild(header);
   });
-  let header = document.createElement('th');
+  header = document.createElement('th');
   header.textContent = 'Daily Location Total';
   row.appendChild(header);
   table.appendChild(row);
-  sectionEl.appendChild(table);
 }
 
 // Initial Values and Instantiate Stores
