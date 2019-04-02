@@ -15,12 +15,7 @@ let firstAndPike = {
       this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
     }
   },
-  total: 0,
-  calcTotal: function () {
-    for (let i = 0; i < this.cookiesPurchased.length; i++) {
-      this.total += this.cookiesPurchased[i];
-    }
-  }
+  total: 0
 };
 
 // SeaTac Airport
@@ -38,12 +33,7 @@ let seaTacAirport = {
       this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
     }
   },
-  total: 0,
-  calcTotal: function () {
-    for (let i = 0; i < this.cookiesPurchased.length; i++) {
-      this.total += this.cookiesPurchased[i];
-    }
-  }
+  total: 0
 };
 
 // Seattle Center
@@ -61,12 +51,7 @@ let seattleCenter = {
       this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
     }
   },
-  total: 0,
-  calcTotal: function () {
-    for (let i = 0; i < this.cookiesPurchased.length; i++) {
-      this.total += this.cookiesPurchased[i];
-    }
-  }
+  total: 0
 };
 
 // Capital Hill
@@ -84,12 +69,7 @@ let capitolHill = {
       this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
     }
   },
-  total: 0,
-  calcTotal: function () {
-    for (let i = 0; i < this.cookiesPurchased.length; i++) {
-      this.total += this.cookiesPurchased[i];
-    }
-  }
+  total: 0
 };
 
 // Alki
@@ -107,16 +87,16 @@ let alki = {
       this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
     }
   },
-  total: 0,
-  calcTotal: function () {
-    for (let i = 0; i < this.cookiesPurchased.length; i++) {
-      this.total += this.cookiesPurchased[i];
-    }
-  }
+  total: 0
 };
 
+function calculateTotal() {
+  for (let i = 0; i < this.cookiesPurchased.length; i++) {
+    this.total += this.cookiesPurchased[i];
+  }
+}
 
-// Numbner of hours each shop is open
+// Number of hours each shop is open
 let hours = 15;
 
 // Make array of all places
@@ -125,8 +105,11 @@ let places = [firstAndPike, seaTacAirport, seattleCenter, capitolHill, alki];
 // Populate the UL in sales.html
 let sectionEl = document.getElementById('dailySales');
 
-// Iterate through each place
+// Iterate through each place and do things
 places.forEach(function (place) {
+
+  // Assign methods to place
+  place.calcTotal = calculateTotal;
 
   // Calculate each place values
   place.calcCookiesPurch();
