@@ -1,8 +1,5 @@
 'use strict';
 
-// Numbner of hours each shop is open
-let hours = 15;
-
 // 1st and Pike Location Object
 let firstAndPike = {
   name: '1st and Pike',
@@ -118,22 +115,32 @@ let alki = {
   }
 };
 
-// Array of all places
-let places = [firstAndPike, seaTacAirport, seattleCenter, capitolHill, alki];
 
-// Calculate the values for properties in each object
-places.forEach(function (place) {
-  place.calcCookiesPurch();
-  place.calcTotal();
-});
+// Numbner of hours each shop is open
+let hours = 15;
+
+// Make array of all places
+let places = [firstAndPike, seaTacAirport, seattleCenter, capitolHill, alki];
 
 // Populate the UL in sales.html
 let sectionEl = document.getElementById('dailySales');
+
+// Iterate through each place
 places.forEach(function (place) {
+
+  // Calculate each place values
+  place.calcCookiesPurch();
+  place.calcTotal();
+
+  // Insert Place Name
   let pEl = document.createElement('p');
   pEl.textContent = `${place.name}`;
   sectionEl.appendChild(pEl);
+
+  // Create UL
   let ulEl = document.createElement('ul');
+
+  // Create LI
   for (let i = 0; i < hours; i++) {
     let liEl = document.createElement('li');
     let tod = (i < 6) ? 'am' : 'pm';
@@ -141,8 +148,12 @@ places.forEach(function (place) {
     liEl.textContent = `${hr}${tod}: ${place.cookiesPurchased[i]} cookies`;
     ulEl.appendChild(liEl);
   }
+
+  // Create total - last LI in UL
   let liEl = document.createElement('li');
   liEl.textContent = `Total: ${place.total} cookies`;
   ulEl.appendChild(liEl);
+
+  // Add UL to section
   sectionEl.appendChild(ulEl);
 });
