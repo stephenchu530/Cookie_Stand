@@ -1,10 +1,7 @@
 'use strict';
 
 // Store Location Object Constructor
-let StoreLocation = function (storeName,
-                              minCustomerEachHour,
-                              maxCustomerEachHour,
-                              avgCookiePerCustomer) {
+let StoreLocation = function(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer) {
   this.storeName = storeName;
   this.minCustomerEachHour = minCustomerEachHour;
   this.maxCustomerEachHour = maxCustomerEachHour;
@@ -23,11 +20,11 @@ StoreLocation.prototype.calcCookiesPurchasedPerDay = function () {
     this.cookiesPurchasedEachHour.push(cookiesEachHour);
     this.totalCookiesPerDay += cookiesEachHour;
   }
-}
+};
 
 // Method to render table row for store
 StoreLocation.prototype.renderRow = function () {
-}
+};
 
 // Helper function to get random number of customers
 function randNumCustomers(minCustomers, maxCustomers) {
@@ -38,13 +35,33 @@ function randNumCustomers(minCustomers, maxCustomers) {
 
 // Function to Instantiate Store Locations
 function makeStores() {
+  let stores = [];
   storeSpecs.forEach(function(store) {
     let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
     newStore.calcCookiesPurchasedPerDay();
-    allStores.push(newStore);
+    stores.push(newStore);
   });
+  return stores;
 }
 
+// Function to Render Empty Table with Header
+function renderDailySalesTable() {
+  let sectionEl = document.getElementById('dailySales');
+  let table = document.createElement('table');
+  let row = document.createElement('row');
+  storeHours.forEach(function(hour) {
+    let header = document.createElement('th');
+    header.textContent = hour;
+    row.appendChild(header);
+  });
+  let header = document.createElement('th');
+  header.textContent = 'Daily Location Total';
+  row.appendChild(header);
+  table.appendChild(row);
+  sectionEl.appendChild(table);
+}
+
+// Initial Values and Instantiate Stores
 let storeSpecs = [
   ['1st and Pike', 23, 65, 6.3],
   ['SeaTac Airport', 3, 24, 1.2],
@@ -53,5 +70,5 @@ let storeSpecs = [
   ['Alki', 2, 16, 4.6],
 ];
 let storeHours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
-let allStores = [];
-makeStores();
+renderDailySalesTable();
+let allStores = makeStores();
