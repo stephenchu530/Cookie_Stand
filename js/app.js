@@ -25,17 +25,11 @@ StoreLocation.prototype.calcCookiesPurchasedPerDay = function () {
 // Method to render table row for store
 StoreLocation.prototype.renderRow = function (table) {
   let row = document.createElement('tr');
-  let data = document.createElement('th');
-  data.textContent = this.storeName;
-  row.appendChild(data);
+  insertDom('th', this.storeName, row);
   this.cookiesPurchasedEachHour.forEach(function(count) {
-    data = document.createElement('td');
-    data.textContent = count;
-    row.appendChild(data);
+    insertDom('td', count, row);
   });
-  data = document.createElement('td');
-  data.textContent = this.totalCookiesPerDay;
-  row.appendChild(data);
+  insertDom('td', this.totalCookiesPerDay, row);
   table.appendChild(row);
 };
 
@@ -44,17 +38,6 @@ function randNumCustomers(minCustomers, maxCustomers) {
   return Math.floor(
     Math.random() * (maxCustomers - minCustomers + 1)
   ) + minCustomers;
-}
-
-// Function to instantiate store locations
-function makeStores() {
-  let stores = [];
-  storeSpecs.forEach(function(store) {
-    let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
-    newStore.calcCookiesPurchasedPerDay();
-    stores.push(newStore);
-  });
-  return stores;
 }
 
 // Function to render empty table with header
@@ -75,40 +58,51 @@ function renderHeader(table) {
   let header = document.createElement('td');
   row.appendChild(header);
   storeHours.forEach(function(item) {
-    header = document.createElement('th');
-    header.textContent = item;
-    row.appendChild(header);
+    insertDom('th', item, row);
   });
-  header = document.createElement('th');
-  header.textContent = 'Daily Location Total';
-  row.appendChild(header);
+  insertDom('th', 'Daily Location Total', row);
   table.appendChild(row);
+}
+
+// Helper function to insert into DOM
+function insertDom(element, content, target) {
+  let data = document.createElement(element);
+  data.textContent = content;
+  target.appendChild(data);
 }
 
 // Function to calculate and render hourly total row
 function renderHourlyTotals(table) {
   let row = document.createElement('tr');
-  let data = document.createElement('th');
-  data.textContent = 'Totals';
-  row.appendChild(data);
+  insertDom('th', 'Totals', row);
   let total = 0;
   for (let i = 0; i < storeHours.length; i++) {
     let subTotal = 0;
     allStores.forEach(function(store) {
       subTotal += store.cookiesPurchasedEachHour[i];
     });
-    data = document.createElement('td');
-    data.textContent = subTotal;
-    row.appendChild(data);
+    insertDom('td', subTotal, row);
     total += subTotal;
   }
-  data = document.createElement('td');
-  data.textContent = total;
-  row.appendChild(data);
+  insertDom('td', total, row);
   table.appendChild(row);
 }
 
-// Initial Values and Instantiate Stores
+// Function to instantiate store locations
+function makeStores() {
+  let stores = [];
+  storeSpecs.forEach(function(store) {
+    let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
+    newStore.calcCookiesPurchasedPerDay();
+    stores.push(newStore);
+  });
+  return stores;
+}
+
+
+//
+// Initialize Values, Instantiate Stores, and Render Table
+//
 let storeSpecs = [
   ['1st and Pike', 23, 65, 6.3],
   ['SeaTac Airport', 3, 24, 1.2],
