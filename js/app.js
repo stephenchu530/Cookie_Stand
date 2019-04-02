@@ -55,7 +55,7 @@ function renderDailySalesTable() {
 // Helper function to render table header
 function renderHeader(table) {
   let row = document.createElement('tr');
-  row.setAttribute("id", "tableHeader");
+  row.setAttribute('id', 'tableHeader');
   let header = document.createElement('td');
   row.appendChild(header);
   storeHours.forEach(function(item) {
