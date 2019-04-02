@@ -1,7 +1,9 @@
 'use strict';
 
+// Numbner of hours each shop is open
 let hours = 15;
 
+// 1st and Pike Location Object
 let firstAndPike = {
   name: '1st and Pike',
   minCustomer: 23,
@@ -24,6 +26,7 @@ let firstAndPike = {
   }
 };
 
+// SeaTac Airport
 let seaTacAirport = {
   name: 'SeaTac Airport',
   minCustomer: 3,
@@ -46,6 +49,7 @@ let seaTacAirport = {
   }
 };
 
+// Seattle Center
 let seattleCenter = {
   name: 'Seattle Center',
   minCustomer: 11,
@@ -68,6 +72,7 @@ let seattleCenter = {
   }
 };
 
+// Capital Hill
 let capitolHill = {
   name: 'Capitol Hill',
   minCustomer: 20,
@@ -90,6 +95,7 @@ let capitolHill = {
   }
 };
 
+// Alki
 let alki = {
   name: 'Alki',
   minCustomer: 2,
@@ -112,13 +118,16 @@ let alki = {
   }
 };
 
+// Array of all places
 let places = [firstAndPike, seaTacAirport, seattleCenter, capitolHill, alki];
 
+// Calculate the values for properties in each object
 places.forEach(function (place) {
   place.calcCookiesPurch();
   place.calcTotal();
 });
 
+// Populate the UL in sales.html
 let sectionEl = document.getElementById('dailySales');
 places.forEach(function (place) {
   let pEl = document.createElement('p');
