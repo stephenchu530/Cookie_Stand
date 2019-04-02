@@ -1,143 +1,116 @@
 'use strict';
 
-// 1st and Pike Location Object
-let firstAndPike = {
-  name: '1st and Pike',
-  minCustomer: 23,
-  maxCustomer: 65,
-  avgCookiePerCustomer: 6.3,
-  randNumCustomer: function () {
-    return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1)) + this.minCustomer;
-  },
-  cookiesPurchased: [],
-  calcCookiesPurch: function () {
-    for (let i = 0; i < hours; i++) {
-      this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
-    }
-  },
-  total: 0
+// Store Location Object Constructor
+let StoreLocation = function(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer) {
+  this.storeName = storeName;
+  this.minCustomerEachHour = minCustomerEachHour;
+  this.maxCustomerEachHour = maxCustomerEachHour;
+  this.avgCookiePerCustomer = avgCookiePerCustomer;
+  this.cookiesPurchasedEachHour = [];
+  this.totalCookiesPerDay = 0;
 };
 
-// SeaTac Airport
-let seaTacAirport = {
-  name: 'SeaTac Airport',
-  minCustomer: 3,
-  maxCustomer: 24,
-  avgCookiePerCustomer: 1.2,
-  randNumCustomer: function () {
-    return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1)) + this.minCustomer;
-  },
-  cookiesPurchased: [],
-  calcCookiesPurch: function () {
-    for (let i = 0; i < hours; i++) {
-      this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
-    }
-  },
-  total: 0
-};
-
-// Seattle Center
-let seattleCenter = {
-  name: 'Seattle Center',
-  minCustomer: 11,
-  maxCustomer: 38,
-  avgCookiePerCustomer: 3.7,
-  randNumCustomer: function () {
-    return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1)) + this.minCustomer;
-  },
-  cookiesPurchased: [],
-  calcCookiesPurch: function () {
-    for (let i = 0; i < hours; i++) {
-      this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
-    }
-  },
-  total: 0
-};
-
-// Capital Hill
-let capitolHill = {
-  name: 'Capitol Hill',
-  minCustomer: 20,
-  maxCustomer: 38,
-  avgCookiePerCustomer: 2.3,
-  randNumCustomer: function () {
-    return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1)) + this.minCustomer;
-  },
-  cookiesPurchased: [],
-  calcCookiesPurch: function () {
-    for (let i = 0; i < hours; i++) {
-      this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
-    }
-  },
-  total: 0
-};
-
-// Alki
-let alki = {
-  name: 'Alki',
-  minCustomer: 2,
-  maxCustomer: 16,
-  avgCookiePerCustomer: 4.6,
-  randNumCustomer: function () {
-    return Math.floor(Math.random() * (this.maxCustomer - this.minCustomer + 1)) + this.minCustomer;
-  },
-  cookiesPurchased: [],
-  calcCookiesPurch: function () {
-    for (let i = 0; i < hours; i++) {
-      this.cookiesPurchased.push(Math.floor(this.avgCookiePerCustomer * this.randNumCustomer()));
-    }
-  },
-  total: 0
-};
-
-// Calculate the total cookies sold for the day
-function calculateTotal() {
-  for (let i = 0; i < this.cookiesPurchased.length; i++) {
-    this.total += this.cookiesPurchased[i];
+// Method to calculate number of cookies purchased per day
+StoreLocation.prototype.calcCookiesPurchasedPerDay = function () {
+  for (let i = 0; i < storeHours.length; i++) {
+    let cookiesEachHour = Math.ceil(
+      this.avgCookiePerCustomer * randNumCustomers(
+        this.minCustomerEachHour, this.maxCustomerEachHour
+      ));
+    this.cookiesPurchasedEachHour.push(cookiesEachHour);
+    this.totalCookiesPerDay += cookiesEachHour;
   }
+};
+
+// Method to render table row for store
+StoreLocation.prototype.renderRow = function (table) {
+  let row = document.createElement('tr');
+  insertDom('th', this.storeName, row);
+  this.cookiesPurchasedEachHour.forEach(function(count) {
+    insertDom('td', count, row);
+  });
+  insertDom('td', this.totalCookiesPerDay, row);
+  table.appendChild(row);
+};
+
+// Helper function to get random number of customers
+function randNumCustomers(minCustomers, maxCustomers) {
+  return Math.floor(
+    Math.random() * (maxCustomers - minCustomers + 1)
+  ) + minCustomers;
 }
 
-// Number of hours each shop is open
-let hours = 15;
+// Function to render empty table with header
+function renderDailySalesTable() {
+  let sectionEl = document.getElementById('dailySales');
+  let table = document.createElement('table');
+  renderHeader(table);
+  allStores.forEach(function(store) {
+    store.renderRow(table);
+  });
+  renderHourlyTotals(table);
+  sectionEl.appendChild(table);
+}
 
-// Make array of all places
-let places = [firstAndPike, seaTacAirport, seattleCenter, capitolHill, alki];
+// Helper function to render table header
+function renderHeader(table) {
+  let row = document.createElement('tr');
+  row.setAttribute("id", "tableHeader");
+  let header = document.createElement('td');
+  row.appendChild(header);
+  storeHours.forEach(function(item) {
+    insertDom('th', item, row);
+  });
+  insertDom('th', 'Daily Location Total', row);
+  table.appendChild(row);
+}
 
-// Populate the UL in sales.html
-let sectionEl = document.getElementById('dailySales');
+// Helper function to insert into DOM
+function insertDom(element, content, target) {
+  let data = document.createElement(element);
+  data.textContent = content;
+  target.appendChild(data);
+}
 
-// Iterate through each place and do things
-places.forEach(function (place) {
-
-  // Assign methods to place
-  place.calcTotal = calculateTotal;
-
-  // Calculate each place values
-  place.calcCookiesPurch();
-  place.calcTotal();
-
-  // Insert Place Name
-  let pEl = document.createElement('p');
-  pEl.textContent = `${place.name}`;
-  sectionEl.appendChild(pEl);
-
-  // Create UL
-  let ulEl = document.createElement('ul');
-
-  // Create LI
-  for (let i = 0; i < hours; i++) {
-    let liEl = document.createElement('li');
-    let tod = (i < 6) ? 'am' : 'pm';
-    let hr = (i < 7) ? i + 6 : i - 6;
-    liEl.textContent = `${hr}${tod}: ${place.cookiesPurchased[i]} cookies`;
-    ulEl.appendChild(liEl);
+// Function to calculate and render hourly total row
+function renderHourlyTotals(table) {
+  let row = document.createElement('tr');
+  insertDom('th', 'Totals', row);
+  let total = 0;
+  for (let i = 0; i < storeHours.length; i++) {
+    let subTotal = 0;
+    allStores.forEach(function(store) {
+      subTotal += store.cookiesPurchasedEachHour[i];
+    });
+    insertDom('td', subTotal, row);
+    total += subTotal;
   }
+  insertDom('td', total, row);
+  table.appendChild(row);
+}
 
-  // Create total - last LI in UL
-  let liEl = document.createElement('li');
-  liEl.textContent = `Total: ${place.total} cookies`;
-  ulEl.appendChild(liEl);
+// Function to instantiate store locations
+function makeStores() {
+  let stores = [];
+  storeSpecs.forEach(function(store) {
+    let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
+    newStore.calcCookiesPurchasedPerDay();
+    stores.push(newStore);
+  });
+  return stores;
+}
 
-  // Add UL to section
-  sectionEl.appendChild(ulEl);
-});
+
+//
+// Initialize Values, Instantiate Stores, and Render Table
+//
+let storeSpecs = [
+  ['1st and Pike', 23, 65, 6.3],
+  ['SeaTac Airport', 3, 24, 1.2],
+  ['Seattle Center', 11, 38, 3.7],
+  ['Capital Hill', 20, 38, 2.3],
+  ['Alki', 2, 16, 4.6],
+];
+let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
+let allStores = makeStores();
+renderDailySalesTable();
