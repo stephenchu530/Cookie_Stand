@@ -125,8 +125,19 @@ function makeStores() {
 }
 
 // Event handler for adding or updating stores
-function handleAddUpdateSubmit(event) {
+function handleAddUpdateSubmit(e) {
   event.preventDefault();
+
+  let storeName = e.target.storeName.value;
+  let minCustomerEachHour = e.target.minCustomerEachHour.value;
+  let maxCustomerEachHour = e.target.maxCustomerEachHour.value;
+  let avgCookiePerCustomer = e.target.avgCookiePerCustomer.value;
+
+  console.log(storeName);
+  console.log(minCustomerEachHour);
+  console.log(maxCustomerEachHour);
+  console.log(avgCookiePerCustomer);
+
   renderDailySalesTable();
 }
 
