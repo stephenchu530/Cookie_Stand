@@ -3,8 +3,8 @@
 // Get store form node
 var storeForm = document.getElementById('store-form');
 
-// Initial Store Specs
-let storeSpecs = [
+// Initial Stores
+let initialStores = [
   ['1st and Pike', 23, 65, 6.3],
   ['SeaTac Airport', 3, 24, 1.2],
   ['Seattle Center', 11, 38, 3.7],
@@ -116,7 +116,7 @@ function randNumCustomers(minCustomers, maxCustomers) {
 // Function to instantiate store locations
 function makeStores() {
   let stores = [];
-  storeSpecs.forEach(function(store) {
+  initialStores.forEach(function(store) {
     let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
     newStore.calcCookiesPurchasedPerDay();
     stores.push(newStore);
@@ -126,18 +126,22 @@ function makeStores() {
 
 // Event handler for adding or updating stores
 function handleAddUpdateSubmit(e) {
-  event.preventDefault();
+  e.preventDefault();
 
   let storeName = e.target.storeName.value;
-  let minCustomerEachHour = e.target.minCustomerEachHour.value;
-  let maxCustomerEachHour = e.target.maxCustomerEachHour.value;
-  let avgCookiePerCustomer = e.target.avgCookiePerCustomer.value;
+  let minCustomerEachHour = parseInt(e.target.minCustomerEachHour.value);
+  let maxCustomerEachHour = parseInt(e.target.maxCustomerEachHour.value);
+  let avgCookiePerCustomer = parseFloat(e.target.avgCookiePerCustomer.value);
 
-  console.log(storeName);
-  console.log(minCustomerEachHour);
-  console.log(maxCustomerEachHour);
-  console.log(avgCookiePerCustomer);
+  let newStore = new StoreLocation(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer);
+  newStore.calcCookiesPurchasedPerDay();
 
+  e.target.storeName.value = null;
+  e.target.minCustomerEachHour.value = null;
+  e.target.maxCustomerEachHour.value = null;
+  e.target.avgCookiePerCustomer.value = null;
+
+  allStores.push(newStore);
   renderDailySalesTable();
 }
 
