@@ -1,5 +1,6 @@
 'use strict';
 
+// Get store form node
 var storeForm = document.getElementById('store-form');
 
 // Initial Store Specs
@@ -13,6 +14,9 @@ let storeSpecs = [
 
 // Store hours
 let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
+
+// All stores array
+let allStores = [];
 
 // Store Location Object Constructor
 let StoreLocation = function(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer) {
@@ -129,8 +133,8 @@ function handleAddUpdateSubmit(event) {
 // Event listener for store submission form
 storeForm.addEventListener('submit', handleAddUpdateSubmit);
 
-// Make initial stores
-let allStores = makeStores();
+// Initialize Starting Stores
+allStores = makeStores();
 
 // Render the Daily Sales Table
 renderDailySalesTable();
