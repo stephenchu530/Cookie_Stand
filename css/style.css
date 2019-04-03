@@ -12,7 +12,6 @@ h2 {
   font-size: 1.5em;
 }
 table {
-  margin: 15px;
   text-align: left;
   word-wrap: break-word;
 }
@@ -22,7 +21,26 @@ th, td {
   padding: 5px;
   vertical-align: middle;
 }
+section {
+  margin: 15px;
+  padding: 15px;
+}
 #tableHeader > * {
   font-weight: 600;
   border: 0;
+}
+fieldset {
+  max-width: 700px;
+}
+fieldset div {
+  margin: 5px;
+  padding: 5px;
+}
+legend {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  padding: 10px 10px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: bold;
 }
