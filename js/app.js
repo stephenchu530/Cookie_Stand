@@ -35,20 +35,19 @@ function randNumCustomers(minCustomers, maxCustomers) {
   return Math.floor(Math.random() * (maxCustomers - minCustomers + 1)) + minCustomers;
 }
 
-// Function to render empty table with header
+// Function to render daily sales table
 function renderDailySalesTable() {
   let sectionEl = document.getElementById('dailySales');
   let table = document.createElement('table');
-  renderHeader(table);
-  allStores.forEach(function(store) {
-    store.renderRow(table);
-  });
-  renderFooter(table);
+  renderTableHeader(table);
+  renderTableBody(table);
+  renderTableFooter(table);
   sectionEl.appendChild(table);
 }
 
 // Function to render table header
-function renderHeader(table) {
+function renderTableHeader(table) {
+  let tHead = document.createElement('thead');
   let row = document.createElement('tr');
   row.setAttribute('id', 'tableHeader');
   appendNewElement('Location', 'th', row);
@@ -56,11 +55,22 @@ function renderHeader(table) {
     appendNewElement(item, 'th', row);
   });
   appendNewElement('Daily Location Total', 'th', row);
-  table.appendChild(row);
+  tHead.appendChild(row);
+  table.appendChild(tHead);
+}
+
+// Function to render the table body
+function renderTableBody(table) {
+  let tBody = document.createElement('tbody');
+  allStores.forEach(function(store) {
+    store.renderRow(tBody);
+  });
+  table.appendChild(tBody);
 }
 
 // Function to calculate and render table footer
-function renderFooter(table) {
+function renderTableFooter(table) {
+  let tFoot = document.createElement('tfoot');
   let row = document.createElement('tr');
   appendNewElement('Totals', 'th', row);
   let total = 0;
@@ -73,7 +83,8 @@ function renderFooter(table) {
     total += subTotal;
   }
   appendNewElement(total, 'td', row);
-  table.appendChild(row);
+  tFoot.appendChild(row);
+  table.appendChild(tFoot);
 }
 
 // Helper function to create and append new element into parent
@@ -81,6 +92,7 @@ function appendNewElement(content, tag, parentElement) {
   let newElement = document.createElement(tag);
   newElement.textContent = content;
   parentElement.appendChild(newElement);
+  return parentElement;
 }
 
 // Function to instantiate store locations
