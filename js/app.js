@@ -92,7 +92,6 @@ function appendNewElement(content, tag, parentElement) {
   let newElement = document.createElement(tag);
   newElement.textContent = content;
   parentElement.appendChild(newElement);
-  return parentElement;
 }
 
 // Function to instantiate store locations
