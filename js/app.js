@@ -43,11 +43,11 @@ function renderDailySalesTable() {
   allStores.forEach(function(store) {
     store.renderRow(table);
   });
-  renderHourlyTotals(table);
+  renderFooter(table);
   sectionEl.appendChild(table);
 }
 
-// Helper function to render table header
+// Function to render table header
 function renderHeader(table) {
   let row = document.createElement('tr');
   row.setAttribute('id', 'tableHeader');
@@ -59,8 +59,8 @@ function renderHeader(table) {
   table.appendChild(row);
 }
 
-// Function to calculate and render hourly total row
-function renderHourlyTotals(table) {
+// Function to calculate and render table footer
+function renderFooter(table) {
   let row = document.createElement('tr');
   appendNewElement('Totals', 'th', row);
   let total = 0;
