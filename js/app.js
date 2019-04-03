@@ -113,17 +113,6 @@ function randNumCustomers(minCustomers, maxCustomers) {
   return Math.floor(Math.random() * (maxCustomers - minCustomers + 1)) + minCustomers;
 }
 
-// Function to instantiate store locations
-function makeStores() {
-  let stores = [];
-  initialStores.forEach(function(store) {
-    let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
-    newStore.calcCookiesPurchasedPerDay();
-    stores.push(newStore);
-  });
-  return stores;
-}
-
 // Event handler for adding or updating stores
 function handleAddUpdateSubmit(e) {
   e.preventDefault();
@@ -162,6 +151,17 @@ function handleAddUpdateSubmit(e) {
   e.target.avgCookiePerCustomer.value = null;
 
   renderDailySalesTable();
+}
+
+// Function to instantiate store locations
+function makeStores() {
+  let stores = [];
+  initialStores.forEach(function(store) {
+    let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
+    newStore.calcCookiesPurchasedPerDay();
+    stores.push(newStore);
+  });
+  return stores;
 }
 
 // Event listener for store submission form
