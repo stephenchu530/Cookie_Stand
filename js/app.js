@@ -133,15 +133,34 @@ function handleAddUpdateSubmit(e) {
   let maxCustomerEachHour = parseInt(e.target.maxCustomerEachHour.value);
   let avgCookiePerCustomer = parseFloat(e.target.avgCookiePerCustomer.value);
 
-  let newStore = new StoreLocation(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer);
-  newStore.calcCookiesPurchasedPerDay();
+  if (maxCustomerEachHour < minCustomerEachHour) {
+    return alert('Minimum Customers/Hour needs to be less than or equal to Maximum Customers/Hour!');
+  }
+
+  for (let i = 0; i < allStores.length; i++) {
+    if (storeName.toLowerCase() === allStores[i].storeName.toLowerCase()) {
+      allStores[i].minCustomerEachHour = minCustomerEachHour;
+      allStores[i].maxCustomerEachHour = maxCustomerEachHour;
+      allStores[i].avgCookiePerCustomer = avgCookiePerCustomer;
+      allStores[i].cookiesPurchasedEachHour = [];
+      allStores[i].totalCookiesPerDay = 0;
+      allStores[i].calcCookiesPurchasedPerDay();
+      storeName = null;
+      break;
+    }
+  }
+
+  if (storeName) {
+    let newStore = new StoreLocation(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer);
+    newStore.calcCookiesPurchasedPerDay();
+    allStores.push(newStore);
+  }
 
   e.target.storeName.value = null;
   e.target.minCustomerEachHour.value = null;
   e.target.maxCustomerEachHour.value = null;
   e.target.avgCookiePerCustomer.value = null;
 
-  allStores.push(newStore);
   renderDailySalesTable();
 }
 
