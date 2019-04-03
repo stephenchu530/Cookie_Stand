@@ -1,5 +1,23 @@
 'use strict';
 
+// Get store form node
+var storeForm = document.getElementById('store-form');
+
+// Initial Stores
+let initialStores = [
+  ['1st and Pike', 23, 65, 6.3],
+  ['SeaTac Airport', 3, 24, 1.2],
+  ['Seattle Center', 11, 38, 3.7],
+  ['Capital Hill', 20, 38, 2.3],
+  ['Alki', 2, 16, 4.6],
+];
+
+// Store hours
+let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
+
+// All stores array
+let allStores = [];
+
 // Store Location Object Constructor
 let StoreLocation = function(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer) {
   this.storeName = storeName;
@@ -30,14 +48,10 @@ StoreLocation.prototype.renderRow = function(table) {
   table.appendChild(row);
 };
 
-// Helper function to get random number of customers
-function randNumCustomers(minCustomers, maxCustomers) {
-  return Math.floor(Math.random() * (maxCustomers - minCustomers + 1)) + minCustomers;
-}
-
 // Function to render daily sales table
 function renderDailySalesTable() {
   let sectionEl = document.getElementById('dailySales');
+  sectionEl.textContent = '';
   let table = document.createElement('table');
   renderTableHeader(table);
   renderTableBody(table);
@@ -94,10 +108,55 @@ function appendNewElement(content, tag, parentElement) {
   parentElement.appendChild(newElement);
 }
 
+// Helper function to get random number of customers
+function randNumCustomers(minCustomers, maxCustomers) {
+  return Math.floor(Math.random() * (maxCustomers - minCustomers + 1)) + minCustomers;
+}
+
+// Event handler for adding or updating stores
+function handleAddUpdateSubmit(e) {
+  e.preventDefault();
+
+  let storeName = e.target.storeName.value;
+  let minCustomerEachHour = parseInt(e.target.minCustomerEachHour.value);
+  let maxCustomerEachHour = parseInt(e.target.maxCustomerEachHour.value);
+  let avgCookiePerCustomer = parseFloat(e.target.avgCookiePerCustomer.value);
+
+  if (maxCustomerEachHour < minCustomerEachHour) {
+    return alert('Minimum Customers/Hour needs to be less than or equal to Maximum Customers/Hour!');
+  }
+
+  for (let i = 0; i < allStores.length; i++) {
+    if (storeName.toLowerCase() === allStores[i].storeName.toLowerCase()) {
+      allStores[i].minCustomerEachHour = minCustomerEachHour;
+      allStores[i].maxCustomerEachHour = maxCustomerEachHour;
+      allStores[i].avgCookiePerCustomer = avgCookiePerCustomer;
+      allStores[i].cookiesPurchasedEachHour = [];
+      allStores[i].totalCookiesPerDay = 0;
+      allStores[i].calcCookiesPurchasedPerDay();
+      storeName = null;
+      break;
+    }
+  }
+
+  if (storeName) {
+    let newStore = new StoreLocation(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer);
+    newStore.calcCookiesPurchasedPerDay();
+    allStores.push(newStore);
+  }
+
+  e.target.storeName.value = null;
+  e.target.minCustomerEachHour.value = null;
+  e.target.maxCustomerEachHour.value = null;
+  e.target.avgCookiePerCustomer.value = null;
+
+  renderDailySalesTable();
+}
+
 // Function to instantiate store locations
 function makeStores() {
   let stores = [];
-  storeSpecs.forEach(function(store) {
+  initialStores.forEach(function(store) {
     let newStore = new StoreLocation(store[0], store[1], store[2], store[3]);
     newStore.calcCookiesPurchasedPerDay();
     stores.push(newStore);
@@ -105,17 +164,11 @@ function makeStores() {
   return stores;
 }
 
+// Event listener for store submission form
+storeForm.addEventListener('submit', handleAddUpdateSubmit);
 
-//
-// Initialize Values, Instantiate Stores, and Render Table
-//
-let storeSpecs = [
-  ['1st and Pike', 23, 65, 6.3],
-  ['SeaTac Airport', 3, 24, 1.2],
-  ['Seattle Center', 11, 38, 3.7],
-  ['Capital Hill', 20, 38, 2.3],
-  ['Alki', 2, 16, 4.6],
-];
-let storeHours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
-let allStores = makeStores();
+// Initialize Starting Stores
+allStores = makeStores();
+
+// Render the Daily Sales Table
 renderDailySalesTable();
