@@ -11,33 +11,28 @@ let StoreLocation = function(storeName, minCustomerEachHour, maxCustomerEachHour
 };
 
 // Method to calculate number of cookies purchased per day
-StoreLocation.prototype.calcCookiesPurchasedPerDay = function () {
+StoreLocation.prototype.calcCookiesPurchasedPerDay = function() {
   for (let i = 0; i < storeHours.length; i++) {
-    let cookiesEachHour = Math.ceil(
-      this.avgCookiePerCustomer * randNumCustomers(
-        this.minCustomerEachHour, this.maxCustomerEachHour
-      ));
+    let cookiesEachHour = Math.ceil(this.avgCookiePerCustomer * randNumCustomers(this.minCustomerEachHour, this.maxCustomerEachHour));
     this.cookiesPurchasedEachHour.push(cookiesEachHour);
     this.totalCookiesPerDay += cookiesEachHour;
   }
 };
 
 // Method to render table row for store
-StoreLocation.prototype.renderRow = function (table) {
+StoreLocation.prototype.renderRow = function(table) {
   let row = document.createElement('tr');
-  insertDom('th', this.storeName, row);
+  appendNewElement(this.storeName, 'th', row);
   this.cookiesPurchasedEachHour.forEach(function(count) {
-    insertDom('td', count, row);
+    appendNewElement(count, 'td', row);
   });
-  insertDom('td', this.totalCookiesPerDay, row);
+  appendNewElement(this.totalCookiesPerDay, 'td', row);
   table.appendChild(row);
 };
 
 // Helper function to get random number of customers
 function randNumCustomers(minCustomers, maxCustomers) {
-  return Math.floor(
-    Math.random() * (maxCustomers - minCustomers + 1)
-  ) + minCustomers;
+  return Math.floor(Math.random() * (maxCustomers - minCustomers + 1)) + minCustomers;
 }
 
 // Function to render empty table with header
@@ -56,37 +51,36 @@ function renderDailySalesTable() {
 function renderHeader(table) {
   let row = document.createElement('tr');
   row.setAttribute('id', 'tableHeader');
-  let header = document.createElement('td');
-  row.appendChild(header);
+  appendNewElement('Location', 'th', row);
   storeHours.forEach(function(item) {
-    insertDom('th', item, row);
+    appendNewElement(item, 'th', row);
   });
-  insertDom('th', 'Daily Location Total', row);
+  appendNewElement('Daily Location Total', 'th', row);
   table.appendChild(row);
-}
-
-// Helper function to insert into DOM
-function insertDom(element, content, target) {
-  let data = document.createElement(element);
-  data.textContent = content;
-  target.appendChild(data);
 }
 
 // Function to calculate and render hourly total row
 function renderHourlyTotals(table) {
   let row = document.createElement('tr');
-  insertDom('th', 'Totals', row);
+  appendNewElement('Totals', 'th', row);
   let total = 0;
   for (let i = 0; i < storeHours.length; i++) {
     let subTotal = 0;
     allStores.forEach(function(store) {
       subTotal += store.cookiesPurchasedEachHour[i];
     });
-    insertDom('td', subTotal, row);
+    appendNewElement(subTotal, 'td', row);
     total += subTotal;
   }
-  insertDom('td', total, row);
+  appendNewElement(total, 'td', row);
   table.appendChild(row);
+}
+
+// Helper function to create and append new element into parent
+function appendNewElement(content, tag, parentElement) {
+  let newElement = document.createElement(tag);
+  newElement.textContent = content;
+  parentElement.appendChild(newElement);
 }
 
 // Function to instantiate store locations
