@@ -25,6 +25,9 @@ section {
   margin: 15px;
   padding: 15px;
 }
+#inputStoreForm {
+  width: 50%;
+}
 #tableHeader > * {
   font-weight: 600;
   border: 0;

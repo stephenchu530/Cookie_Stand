@@ -52,6 +52,7 @@ StoreLocation.prototype.renderRow = function(table) {
 function renderDailySalesTable() {
   let sectionEl = document.getElementById('dailySales');
   sectionEl.textContent = '';
+  appendNewElement('Daily Sales Projection', 'h2', sectionEl);
   let table = document.createElement('table');
   renderTableHeader(table);
   renderTableBody(table);
