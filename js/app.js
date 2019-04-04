@@ -118,39 +118,42 @@ function randNumCustomers(minCustomers, maxCustomers) {
 function handleAddUpdateSubmit(e) {
   e.preventDefault();
 
+  // Get values from form
   let storeName = e.target.storeName.value;
   let minCustomerEachHour = parseInt(e.target.minCustomerEachHour.value);
   let maxCustomerEachHour = parseInt(e.target.maxCustomerEachHour.value);
   let avgCookiePerCustomer = parseFloat(e.target.avgCookiePerCustomer.value);
 
+  // Check if min <= max
   if (maxCustomerEachHour < minCustomerEachHour) {
     return alert('Minimum Customers/Hour needs to be less than or equal to Maximum Customers/Hour!');
   }
 
-  for (let i = 0; i < allStores.length; i++) {
-    if (storeName.toLowerCase() === allStores[i].storeName.toLowerCase()) {
-      allStores[i].minCustomerEachHour = minCustomerEachHour;
-      allStores[i].maxCustomerEachHour = maxCustomerEachHour;
-      allStores[i].avgCookiePerCustomer = avgCookiePerCustomer;
-      allStores[i].cookiesPurchasedEachHour = [];
-      allStores[i].totalCookiesPerDay = 0;
-      allStores[i].calcCookiesPurchasedPerDay();
-      storeName = null;
-      break;
-    }
-  }
+  // Find if store currently exists
+  let store = allStores.filter(store => store.storeName.toLowerCase() === storeName.toLowerCase());
 
-  if (storeName) {
+  if (store.length) {
+    // Update store if exists
+    store[0].minCustomerEachHour = minCustomerEachHour;
+    store[0].maxCustomerEachHour = maxCustomerEachHour;
+    store[0].avgCookiePerCustomer = avgCookiePerCustomer;
+    store[0].cookiesPurchasedEachHour = [];
+    store[0].totalCookiesPerDay = 0;
+    store[0].calcCookiesPurchasedPerDay();
+  } else {
+    // Make new store if not exist
     let newStore = new StoreLocation(storeName, minCustomerEachHour, maxCustomerEachHour, avgCookiePerCustomer);
     newStore.calcCookiesPurchasedPerDay();
     allStores.push(newStore);
   }
 
+  // Reset form values
   e.target.storeName.value = null;
   e.target.minCustomerEachHour.value = null;
   e.target.maxCustomerEachHour.value = null;
   e.target.avgCookiePerCustomer.value = null;
 
+  // Re-render table
   renderDailySalesTable();
 }
 
