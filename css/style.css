@@ -1,3 +1,12 @@
+body {
+  background-color: #C6915D;
+  color: #36342B;
+}
+header {
+  background: #A46845 url(../img/salmon.png) center no-repeat;
+  background-size: auto 100px;
+  height: 100px;
+}
 h1, h2, p {
   margin: 5px;
   padding: 5px;
@@ -16,7 +25,7 @@ table {
   word-wrap: break-word;
 }
 th, td {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #BC4C34;
   width: 150px;
   padding: 5px;
   vertical-align: middle;
@@ -32,15 +41,19 @@ section {
   font-weight: 600;
   border: 0;
 }
+tfoot {
+  background-color: #D0C9C2;
+}
 fieldset {
-  max-width: 700px;
+  max-width: 400px;
+  border: 1px solid #BC4C34;
 }
 fieldset div {
   margin: 5px;
   padding: 5px;
 }
 legend {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #BC4C34;
   border-radius: 5px;
   padding: 10px 10px;
   text-align: left;

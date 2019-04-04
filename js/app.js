@@ -165,11 +165,14 @@ function makeStores() {
   return stores;
 }
 
-// Event listener for store submission form
-storeForm.addEventListener('submit', handleAddUpdateSubmit);
+// Only load if on Sales Page
+if (storeForm) {
+  // Event listener for store submission form
+  storeForm.addEventListener('submit', handleAddUpdateSubmit);
 
-// Initialize Starting Stores
-allStores = makeStores();
+  // Initialize Starting Stores
+  allStores = makeStores();
 
-// Render the Daily Sales Table
-renderDailySalesTable();
+  // Render the Daily Sales Table
+  renderDailySalesTable();
+}
