@@ -1,7 +1,7 @@
 'use strict';
 
 // Get store form node
-var storeForm = document.getElementById('store-form');
+var storeForm = document.getElementById('addUpdateForm');
 
 // Initial Stores
 let initialStores = [
@@ -50,10 +50,8 @@ StoreLocation.prototype.renderRow = function(table) {
 
 // Function to render daily sales table
 function renderDailySalesTable() {
-  let sectionEl = document.getElementById('dailySales');
-  sectionEl.textContent = '';
-  appendNewElement('Daily Sales Projection', 'h2', sectionEl);
-  let table = document.createElement('table');
+  let table = document.getElementById('dailySalesTable');
+  table.textContent = '';
   renderTableHeader(table);
   renderTableBody(table);
   renderTableFooter(table);

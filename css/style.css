@@ -1,62 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Dokdo|Roboto:400,500,700');
+
 body {
-  background-color: #C6915D;
-  color: #36342B;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 }
+
+a, a:link, a:visited {
+  text-decoration: none;
+  color: #333333;
+}
+
+h2 {
+  font-family: 'Dokdo', cursive;
+  font-size: 30px;
+}
+
 header {
-  background: #A46845 url(../img/salmon.png) center no-repeat;
-  background-size: auto 100px;
-  height: 100px;
+  background-color: #5DBCD2;
+  height: 60px;
+  margin-bottom: 30px;
 }
-h1, h2, p {
-  margin: 5px;
-  padding: 5px;
-}
-h1, h2 {
+
+nav {
+  width: 960px;
+  margin: 0px auto;
+  max-height: 60px;
+  vertical-align: center;
   font-weight: bold;
 }
-h1 {
-  font-size: 2em;
-}
-h2 {
-  font-size: 1.5em;
-}
-table {
-  text-align: left;
-  word-wrap: break-word;
-}
-th, td {
-  border: 1px solid #BC4C34;
-  width: 150px;
-  padding: 5px;
+
+nav img {
+  margin: 0;
+  padding: 0;
+  height: 60px;
   vertical-align: middle;
 }
-section {
-  margin: 15px;
-  padding: 15px;
+
+nav div, nav ul, nav ul li {
+  display: inline-block;
 }
-#inputStoreForm {
-  width: 50%;
+
+nav div, nav ul {
+  vertical-align: middle;
 }
-#tableHeader > * {
-  font-weight: 600;
-  border: 0;
+
+nav div {
+  font-size: 15px;
+  margin-left: 15px;
 }
-tfoot {
-  background-color: #D0C9C2;
+
+nav ul {
+  float: right;
+  line-height: 60px;
 }
-fieldset {
-  max-width: 400px;
-  border: 1px solid #BC4C34;
+
+nav ul li {
+  width: 90px;
+  text-align: center;
 }
-fieldset div {
-  margin: 5px;
-  padding: 5px;
+
+nav ul li a, nav ul li a:link, nav ul li a:visited {
+  color: #efefef;
 }
-legend {
-  border: 1px solid #BC4C34;
-  border-radius: 5px;
-  padding: 10px 10px;
-  text-align: left;
-  text-transform: uppercase;
-  font-weight: bold;
+
+main {
+  margin-bottom: 30px;
+}
+
+footer {
+  background-color: #5DBCD2;
+  height: 60px;
 }
