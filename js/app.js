@@ -50,7 +50,7 @@ StoreLocation.prototype.renderRow = function(table) {
 
 // Function to render daily sales table
 function renderDailySalesTable() {
-  let sectionEl = document.getElementById('dailySales');
+  let sectionEl = document.getElementById('dailySalesTable');
   sectionEl.textContent = '';
   appendNewElement('Daily Sales Projection', 'h2', sectionEl);
   let table = document.createElement('table');
