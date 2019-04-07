@@ -48,38 +48,42 @@
     <!-- MAIN -->
     <main>
 
-      <!-- PAGE TITLE -->
-      <h1>Daily Sales Projection</h1>
+      <!-- SALES -->
+      <div id="sales">
 
-      <!-- ADD UPDATE STORE FORM -->
-      <form id="addUpdateForm">
-	<fieldset>
-	  <legend>Add/Update Store Information</legend>
-	  <div>
-	    <label for="storeName">Store Name: </label>
-	    <input name="storeName" type="text" placeholder="Store Name" required>
-	  </div>
-	  <div>
-	    <label for="minCustomerEachHour">Minimum Customers/Hour: </label>
-	    <input name="minCustomerEachHour" type="number" min="0" placeholder="Number" required>
-	  </div>
-	  <div>
-	    <label for="maxCustomerEachHour">Maximum Customers/Hour: </label>
-	    <input name="maxCustomerEachHour" type="number" min="0" placeholder="Number" required>
-	  </div>
-	  <div>
-	    <label for="avgCookiePerCustomer">Average Cookie Sale/Customer: </label>
-	    <input name="avgCookiePerCustomer" type="number" min="0.0" step="0.1" placeholder="Number" required>
-	  </div>
-	  <div>
-	    <button type="submit">Add/Update</button>
-	  </div>
-	</fieldset>
-      </form>
+	<!-- PAGE TITLE -->
+	<h2>Daily Sales Projection</h2>
 
-      <!-- DAILY SALES TABLE-->
-      <table id="dailySalesTable">
-      </table>
+	<!-- ADD UPDATE STORE FORM -->
+	<form id="addUpdateForm">
+	  <fieldset>
+	    <legend>Add/Update Store Information</legend>
+	    <div>
+	      <label for="storeName">Store Name: </label>
+	      <input name="storeName" type="text" placeholder="Store Name" required>
+	    </div>
+	    <div>
+	      <label for="minCustomerEachHour">Minimum Customers/Hour: </label>
+	      <input name="minCustomerEachHour" type="number" min="0" placeholder="Number" required>
+	    </div>
+	    <div>
+	      <label for="maxCustomerEachHour">Maximum Customers/Hour: </label>
+	      <input name="maxCustomerEachHour" type="number" min="0" placeholder="Number" required>
+	    </div>
+	    <div>
+	      <label for="avgCookiePerCustomer">Average Cookie Sale/Customer: </label>
+	      <input name="avgCookiePerCustomer" type="number" min="0.0" step="0.1" placeholder="Number" required>
+	    </div>
+	    <div>
+	      <button type="submit">Add/Update</button>
+	    </div>
+	  </fieldset>
+	</form>
+
+	<!-- DAILY SALES TABLE-->
+	<table id="dailySalesTable">
+	</table>
+      </div>
     </main>
 
     <!-- FOOTER -->
