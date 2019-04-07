@@ -55,7 +55,6 @@ function renderDailySalesTable() {
   renderTableHeader(table);
   renderTableBody(table);
   renderTableFooter(table);
-  sectionEl.appendChild(table);
 }
 
 // Function to render table header
