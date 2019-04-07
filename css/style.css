@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Dokdo|Roboto:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script:400,700|Dokdo|Roboto:400,500,700');
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -64,7 +64,30 @@ nav ul li a, nav ul li a:link, nav ul li a:visited {
 }
 
 main {
+  overflow: auto;
+}
+
+main section {
+  margin: 0 auto 30px auto;
+  width: 960px;
+}
+
+main section:first-child {
+  height: 361px;
+}
+
+main section:first-child img {
+  width: 640px;
+  margin-right: 30px;
   margin-bottom: 30px;
+}
+
+main section:first-child h3 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 45px;
+  text-align: center;
+  line-height: 90px;
 }
 
 footer {
