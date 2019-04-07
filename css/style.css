@@ -182,3 +182,54 @@ footer {
   background-color: #5DBCD2;
   height: 60px;
 }
+
+#sales {
+  clear: both;
+  width: 960px;
+  overflow: visible;
+  margin: 0 auto 30px auto;
+}
+
+#addUpdateForm {
+  width: 50%;
+}
+
+fieldset {
+  max-width: 400px;
+  border: 1px solid #BC4C34;
+}
+
+fieldset div {
+  margin: 5px;
+  padding: 5px;
+}
+
+legend {
+  border: 1px solid #BC4C34;
+  border-radius: 5px;
+  padding: 10px 10px;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+table {
+  text-align: left;
+  word-wrap: break-word;
+}
+
+th, td {
+  border: 1px solid #BC4C34;
+  width: 150px;
+  padding: 5px;
+  vertical-align: middle;
+}
+
+th {
+  font-weight: 600;
+  border: 0;
+}
+
+tfoot {
+  background-color: #D0C9C2;
+}
