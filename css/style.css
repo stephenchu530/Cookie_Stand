@@ -95,6 +95,69 @@ main section:first-child h3 {
   line-height: 75px;
 }
 
+main section:nth-child(2) {
+  height: 323px;
+}
+
+main section:nth-child(2) img {
+  width: 320px;
+}
+
+main section:nth-child(2) ul {
+  height: 323px;
+}
+
+main section:nth-child(2) ul li {
+  width: 320px;
+  float: left;
+}
+
+main section:nth-child(2) ul li:nth-child(2) {
+  width: 280px;
+  margin: 30px 20px;
+  font-size: 30px;
+  color: #A34A28;
+  text-align: center;
+  line-height: 45px;
+}
+
+main section:nth-child(2) ul li:last-child img {
+  margin-top: 60px;
+}
+
+main section:nth-child(3) {
+  clear: both;
+}
+
+main section:nth-child(3) img {
+  width: 240px;
+}
+
+main section:nth-child(3) ul {
+  height: 240px;
+}
+
+main section:nth-child(3) ul li {
+  float: left;
+  width: 240px;
+}
+
+main section:nth-child(3) ul li:first-child {
+  margin-top: 14px;
+}
+
+main section:nth-child(3) ul li:nth-child(even) {
+  width: 200px;
+  margin: 20px 20px;
+  font-size: 30px;
+  color: #A34A28;
+  text-align: center;
+  line-height: 45px;
+}
+
+main section:last-child {
+}
+
 footer {
   background-color: #5DBCD2;
   height: 60px;
