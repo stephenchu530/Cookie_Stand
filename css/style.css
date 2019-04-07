@@ -18,6 +18,7 @@ h2 {
 header {
   background-color: #5DBCD2;
   height: 60px;
+  margin-bottom: 30px;
 }
 
 nav {
@@ -63,7 +64,10 @@ nav ul li a, nav ul li a:link, nav ul li a:visited {
 }
 
 main {
+  margin-bottom: 30px;
 }
 
 footer {
+  background-color: #5DBCD2;
+  height: 60px;
 }
